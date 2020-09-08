@@ -3,9 +3,7 @@ package master.kotlin.readerpro.help
 import android.content.Context
 import master.kotlin.readerpro.App
 import master.kotlin.readerpro.constant.PreferKey
-import master.kotlin.readerpro.utils.getPrefString
-import master.kotlin.readerpro.utils.putPrefString
-import master.kotlin.readerpro.utils.sysIsDarkMode
+import master.kotlin.readerpro.utils.*
 
 /**
  * Created on 2020/9/2.
@@ -31,5 +29,12 @@ object Appconfig {
             }else{
                 App.INSTANCE.putPrefString(PreferKey.themeMode,"1")
             }
+        }
+
+
+    var isShowRSS: Boolean
+        get() = App.INSTANCE.getPrefBoolean(PreferKey.showRss, true)
+        set(value) {
+            App.INSTANCE.putPrefBoolean(PreferKey.showRss, value)
         }
 }

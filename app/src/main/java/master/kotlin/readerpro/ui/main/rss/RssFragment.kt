@@ -1,14 +1,25 @@
 package master.kotlin.readerpro.ui.main.rss
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import master.kotlin.readerpro.base.BaseFragment
+import master.kotlin.readerpro.R
 
 /**
  * Created on 2020/9/2.
  * Description
  * Others
  */
-class RssFragment() : Fragment(){
+class RssFragment() : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_rss, container, false)
+    }
 
 
 }

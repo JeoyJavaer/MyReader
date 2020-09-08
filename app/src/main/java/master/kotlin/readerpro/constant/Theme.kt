@@ -7,7 +7,7 @@ import master.kotlin.readerpro.utils.ColorUtils
 /**
  * Created on 2020/9/2.
  * Description
- * Others
+ *
  */
 enum class Theme {
     Dark,Light,Auto,Transparent;

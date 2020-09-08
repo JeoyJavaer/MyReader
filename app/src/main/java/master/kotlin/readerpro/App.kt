@@ -9,7 +9,7 @@ import androidx.multidex.MultiDexApplication
  * Others
  */
 
-class App :MultiDexApplication() {
+class App :Application() {
 
     companion object{
         @JvmStatic
@@ -18,5 +18,10 @@ class App :MultiDexApplication() {
 
 
 
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        INSTANCE =this
     }
 }
