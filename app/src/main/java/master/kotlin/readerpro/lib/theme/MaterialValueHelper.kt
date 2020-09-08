@@ -1,4 +1,4 @@
-package io.legado.app.lib.theme
+package master.kotlin.readerpro.lib.theme
 
 import android.annotation.SuppressLint
 import android.content.Context

@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import io.legado.app.lib.theme.backgroundColor
+import master.kotlin.readerpro.lib.theme.backgroundColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import master.kotlin.readerpro.constant.Appconst

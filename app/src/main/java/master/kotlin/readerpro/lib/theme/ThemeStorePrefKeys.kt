@@ -1,4 +1,4 @@
-package io.legado.app.lib.theme
+package master.kotlin.readerpro.lib.theme
 
 /**
  * @author Aidan Follestad (afollestad), Karim Abou Zeid (kabouzeid)

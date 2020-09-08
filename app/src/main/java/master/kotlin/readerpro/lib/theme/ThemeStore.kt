@@ -1,4 +1,4 @@
-package io.legado.app.lib.theme
+package master.kotlin.readerpro.lib.theme
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -294,7 +294,11 @@ private constructor(private val mContext: Context) : ThemeStoreInterface {
         fun elevation(context: Context): Float {
             return prefs(context).getFloat(
                 ThemeStorePrefKeys.KEY_ELEVATION,
-                ATHUtils.resolveFloat(context, android.R.attr.elevation, context.resources.getDimension(R.dimen.design_appbar_elevation))
+                ATHUtils.resolveFloat(
+                    context,
+                    android.R.attr.elevation,
+                    context.resources.getDimension(R.dimen.design_appbar_elevation)
+                )
             )
         }
 

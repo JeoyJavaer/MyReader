@@ -37,8 +37,6 @@ class TitleBar(context: Context, attrs: AttributeSet?) : AppBarLayout(context, a
     init {
 
 
-        //
-
     }
 
 
