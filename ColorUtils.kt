@@ -7,6 +7,9 @@ import androidx.annotation.FloatRange
 import java.util.*
 import kotlin.math.*
 
+/**
+ *
+ */
 @Suppress("unused")
 object ColorUtils {
 
