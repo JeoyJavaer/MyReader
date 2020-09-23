@@ -7,6 +7,7 @@ import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 
 import com.google.android.material.appbar.AppBarLayout
+import master.kotlin.readerpro.R
 
 /**
  * Created on 2020/9/8.
@@ -29,31 +30,27 @@ class TitleBar(context: Context, attrs: AttributeSet?) : AppBarLayout(context, a
             toolbar.subtitle = value
         }
 
-    private  val displayHomeAsUp:Boolean
-    private val  navigationIconTint:ColorStateList
-    private val navigationIconTintMode:Int
-    private val  attachToActivity:Boolean
+    private val displayHomeAsUp: Boolean
+    private val navigationIconTint: ColorStateList?
+    private val navigationIconTintMode: Int
+    private val attachToActivity: Boolean
 
     init {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, R.attr.titleBarStyle, 0)
+        navigationIconTint = a.getColorStateList(R.styleable.TitleBar_navigationIconTint)
+        navigationIconTintMode = a.getInt(R.styleable.TitleBar_navigationIconTintMode,9)
+        attachToActivity = a.getBoolean(R.styleable.TitleBar_attachToActivity,true)
+        displayHomeAsUp = a.getBoolean(R.styleable.TitleBar_displayHomeAsUp,true)
 
+
+        toolbar = findViewById(R.id.toolbar)
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+

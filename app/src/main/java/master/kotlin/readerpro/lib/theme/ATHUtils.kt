@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.annotation.AttrRes
 
 /**
- * @author Aidan Follestad (afollestad)
+ * @author Aidan  
  */
 object ATHUtils {
 

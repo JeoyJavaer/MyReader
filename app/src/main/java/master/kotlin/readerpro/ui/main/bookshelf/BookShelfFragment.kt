@@ -16,7 +16,7 @@ class BookShelfFragment : VMBaseFragment<BookShelfViewModel>(R.layout.fragment_b
         get() = getViewModel(BookShelfViewModel::class.java)
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        setSupportToolbar(toolbar)
+//        setSupportToolbar(toolbar)
 
     }
 

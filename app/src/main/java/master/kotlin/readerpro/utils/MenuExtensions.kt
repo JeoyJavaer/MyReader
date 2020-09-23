@@ -11,7 +11,7 @@ import master.kotlin.readerpro.constant.Theme
 /**
  * Created on 2020/9/2.
  * Description
- * Others
+ *
  */
 @SuppressLint("RestrictedApi")
 fun Menu.applyTint(context: Context, theme: Theme=Theme.Auto):Menu = this.let{ menu ->
