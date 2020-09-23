@@ -18,13 +18,17 @@ import  kotlinx.android.synthetic.main.activity_main.*
 import master.kotlin.readerpro.help.Appconfig
 
 /**
- *
+ *主页面
  */
 class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
     BottomNavigationView.OnNavigationItemReselectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private var pagePosition =0 // 记录导航栏被选中的位置
+    private var pagePosition = 0 // 记录导航栏被选中的位置
+    private var bookshelfReseleted :Long =0
+    private var exitTIme:Long=0
+
+
     private val fragmentId = arrayOf(0, 1, 2, 3)
     private val fragmentMap = mapOf<Int, Fragment>(
         Pair(fragmentId[0], BookShelfFragment()),
@@ -55,34 +59,49 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
     override fun onPageSelected(position: Int) {
 //       view_pager_main.hideSoftInput()
         pagePosition = position
-        when(position){
-            0,1,3 -> bottom_navigation_view.menu.getItem(position).isChecked=true
-            2 -> if (Appconfig.isShowRSS){
-                bottom_navigation_view.menu.getItem(position).isChecked=true
-            }else{
-                bottom_navigation_view.menu.getItem(3).isChecked=true
+        when (position) {
+            0, 1, 3 -> bottom_navigation_view.menu.getItem(position).isChecked = true
+            2 -> if (Appconfig.isShowRSS) {
+                bottom_navigation_view.menu.getItem(position).isChecked = true
+            } else {
+                bottom_navigation_view.menu.getItem(3).isChecked = true
             }
         }
 
     }
 
     override fun onNavigationItemReselected(item: MenuItem) {
-        TODO("Not yet implemented")
+        when (item.itemId) {
+            R.id.menu_bookshelf ->{
+                if (System.currentTimeMillis() - bookshelfReseleted > 300) {
+                    bookshelfReseleted=System.currentTimeMillis()
+                }else{
+                    (fragmentMap[0] as? BookShelfFragment)?.gotoTop();
+                }
+
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        when (item.itemId) {
+            R.id.menu_bookshelf -> view_pager_main.setCurrentItem(0, false)
+            R.id.menu_find_book -> view_pager_main.setCurrentItem(1, false)
+            R.id.menu_rss -> view_pager_main.setCurrentItem(2, false)
+            R.id.menu_my_config -> view_pager_main.setCurrentItem(3, false)
+
+        }
+
+        return false
     }
 
 
-    private inner class TabFragmentAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(
-        fm,
-        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    private inner class TabFragmentAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
     ) {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> fragmentMap.getValue(fragmentId[0])
-                1 -> fragmentMap.getValue(fragmentId[0])
+                1 -> fragmentMap.getValue(fragmentId[1])
                 2 -> if (Appconfig.isShowRSS) {
                     fragmentMap.getValue(fragmentId[2])
                 } else {

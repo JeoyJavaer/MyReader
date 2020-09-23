@@ -20,5 +20,9 @@ class BookShelfFragment : VMBaseFragment<BookShelfViewModel>(R.layout.fragment_b
 
     }
 
+    fun gotoTop() {
+
+    }
+
 
 }
