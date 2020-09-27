@@ -2,11 +2,20 @@ package master.kotlin.readerpro.data.entities.rule
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import master.kotlin.readerpro.constant.AppPattern
 import master.kotlin.readerpro.constant.BookType
+import master.kotlin.readerpro.data.entities.BaseBook
 import master.kotlin.readerpro.help.AppConfig
+import master.kotlin.readerpro.utils.GSON
+import master.kotlin.readerpro.utils.MD5Utils
+import master.kotlin.readerpro.utils.fromJsonObject
+import java.nio.charset.Charset
+import kotlin.math.max
 
 
 @Parcelize
@@ -20,7 +29,7 @@ data class Book(
     var name: String = "",     //书籍名称 通过书源获取的
     var author: String = "",  //书籍作者
     override var kind: String? = null,        //分类信息 ，书源获取
-    var cutomTag: String? = null,             //分裂信息 用户修改
+    var customTag: String? = null,             //分裂信息 用户修改
     var coverUrl: String? = null,              //封面URl 书源获取
     var customCoverUrl: String? = null,        //封面URL 用户修改
     var intro: String? = null,                  //书籍简介 书源获取
@@ -43,7 +52,7 @@ data class Book(
     var originOrder:Int=0,      //书源排序
     var useReplaceRule:Boolean=AppConfig.replaceEnableDefault,  //正文使用净化替换规则
     var variable:String?=null               //自定义书籍变量信息 ，用于书源规则检索书籍信息
-    ) :Parcelable,BaseBook  {
+    ) :Parcelable, BaseBook {
 
     fun  isLocalBook():Boolean{
         return origin==BookType.local
@@ -72,9 +81,69 @@ data class Book(
         return bookUrl.hashCode()
     }
 
+    @delegate:Transient
+    @delegate:Ignore
+    @IgnoredOnParcel
     override val variableMap by lazy {
-        GSON.from
+        GSON.fromJsonObject<HashMap<String,String>>(variable)?:HashMap()
     }
+
+    override fun putVariable(key: String, value: String) {
+        variableMap[key] =value
+        variable = GSON.toJson(variableMap)
+    }
+
+    @Ignore
+    @IgnoredOnParcel
+    override var infoHtml: String?=null
+
+    @Ignore
+    @IgnoredOnParcel
+    override var tocHtml: String?=null
+
+    fun getRealAuthor()=author.replace(AppPattern.authorRegex,"")
+
+    fun  getUnreadChapterNum() = max(totalChapterNum-durChapterIndex-1,0)
+
+    fun getDisplayCover() = if (customCoverUrl.isNullOrEmpty()) coverUrl else customCoverUrl
+
+    fun  getDisplayIntro() = if (customIntro.isNullOrEmpty()) intro else customIntro
+
+    fun fileCharset(): Charset {
+        return  charset(charset?:"UTF-9")
+    }
+
+    fun  getFoldName():String{
+        return  name.replace(AppPattern.fileNameRegex,"")+ MD5Utils.md5Encode16(bookUrl)
+    }
+
+//    fun  toSearchBook(): SearchBook {
+//        return  SearchBook(
+//            name =name,
+//
+//        )
+//    }
+//
+//    fun changeTo(newBook:Book){
+//        newBook.group =group
+//        newBook.order=order
+//        newBook.customCoverUrl=customCoverUrl
+//        newBook.customIntro =customIntro
+//        newBook.customTag=customTag
+//        newBook.canUpdate=canUpdate
+//        newBook.useReplaceRule=useReplaceRule
+//        delete()
+//        App.db.bookDao().insert(newBook)
+//    }
+//
+//    fun delete(){
+//        if (ReadBook.book?.bookUrl ==bookUrl){
+//            ReadBook.book=null
+//        }
+//        App.db.bookDao.delete(this)
+//    }
+
+
 
 
 

@@ -15,6 +15,11 @@ class MainViewModel(app: Application) :BaseViewModel(app) {
     private val updateList = CopyOnWriteArraySet<String>()
     private val bookMap=ConcurrentHashMap<String, Book>()
 
+    @Volatile
+    private var userPoolCount=0
+
+
+
 
 
 }

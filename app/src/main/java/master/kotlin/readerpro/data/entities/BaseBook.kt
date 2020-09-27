@@ -1,4 +1,4 @@
-package master.kotlin.readerpro.data.entities.rule
+package master.kotlin.readerpro.data.entities
 
 import master.kotlin.readerpro.utils.splitNotBlank
 
