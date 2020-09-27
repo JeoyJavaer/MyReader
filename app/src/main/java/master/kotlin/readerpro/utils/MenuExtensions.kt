@@ -25,6 +25,6 @@ fun Menu.applyTint(context: Context, theme: Theme=Theme.Auto):Menu = this.let{ m
     return menu
 }
 
-fun Menu.applyOnTint(context: Context) {
+fun Menu.applyOpenTint(context: Context) {
 
 }

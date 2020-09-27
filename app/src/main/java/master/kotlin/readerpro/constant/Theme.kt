@@ -1,7 +1,6 @@
 package master.kotlin.readerpro.constant
 
-import android.graphics.Color
-import master.kotlin.readerpro.help.Appconfig
+import master.kotlin.readerpro.help.AppConfig
 import master.kotlin.readerpro.utils.ColorUtils
 
 /**
@@ -14,7 +13,7 @@ enum class Theme {
 
     companion object{
         fun  getTheme():Theme{
-            return if (Appconfig.isNightTheme){
+            return if (AppConfig.isNightTheme){
                 Dark
             }else Light
         }
