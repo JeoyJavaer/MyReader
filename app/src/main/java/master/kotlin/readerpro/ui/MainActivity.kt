@@ -1,21 +1,21 @@
 package master.kotlin.readerpro.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import master.kotlin.readerpro.R
+import master.kotlin.readerpro.help.AppConfig
 import master.kotlin.readerpro.ui.main.bookshelf.BookShelfFragment
 import master.kotlin.readerpro.ui.main.explore.ExploreFragment
 import master.kotlin.readerpro.ui.main.my.MyFragment
 import master.kotlin.readerpro.ui.main.rss.RssFragment
-import  kotlinx.android.synthetic.main.activity_main.*
-import master.kotlin.readerpro.help.Appconfig
 
 /**
  *
@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
     BottomNavigationView.OnNavigationItemReselectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private var pagePosition =0 // 记录导航栏被选中的位置
+    private var boodshelfReselected: Long = 0
+    private var pagePosition = 0 // 记录导航栏被选中的位置
     private val fragmentId = arrayOf(0, 1, 2, 3)
     private val fragmentMap = mapOf<Int, Fragment>(
         Pair(fragmentId[0], BookShelfFragment()),
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
         Pair(fragmentId[2], RssFragment()),
         Pair(fragmentId[3], MyFragment())
     )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
         view_pager_main.addOnPageChangeListener(this)
         bottom_navigation_view.setOnNavigationItemReselectedListener(this)
         bottom_navigation_view.setOnNavigationItemSelectedListener(this)
-        bottom_navigation_view.menu.findItem(R.id.menu_rss).isVisible = Appconfig.isShowRSS
+        bottom_navigation_view.menu.findItem(R.id.menu_rss).isVisible = AppConfig.isShowRSS
     }
 
     override fun onPageScrollStateChanged(state: Int) {
@@ -55,23 +57,39 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
     override fun onPageSelected(position: Int) {
 //       view_pager_main.hideSoftInput()
         pagePosition = position
-        when(position){
-            0,1,3 -> bottom_navigation_view.menu.getItem(position).isChecked=true
-            2 -> if (Appconfig.isShowRSS){
-                bottom_navigation_view.menu.getItem(position).isChecked=true
-            }else{
-                bottom_navigation_view.menu.getItem(3).isChecked=true
+        when (position) {
+            0, 1, 3 -> bottom_navigation_view.menu.getItem(position).isChecked = true
+            2 -> if (AppConfig.isShowRSS) {
+                bottom_navigation_view.menu.getItem(position).isChecked = true
+            } else {
+                bottom_navigation_view.menu.getItem(3).isChecked = true
             }
         }
 
     }
 
     override fun onNavigationItemReselected(item: MenuItem) {
-        TODO("Not yet implemented")
+        when (item.itemId) {
+            R.id.menu_bookshelf -> {
+                if (System.currentTimeMillis() - boodshelfReselected > 3000) {
+                    boodshelfReselected = System.currentTimeMillis()
+                } else {
+                    (fragmentMap[0] as? BookShelfFragment)?.gotoTop()
+                }
+
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        when (item.itemId) {
+            R.id.menu_bookshelf -> view_pager_main.setCurrentItem(0, false)
+            R.id.menu_find_book -> view_pager_main.setCurrentItem(1, false)
+            R.id.menu_rss -> view_pager_main.setCurrentItem(2, false)
+            R.id.menu_my_config -> view_pager_main.setCurrentItem(3, false)
+        }
+
+        return false
     }
 
 
@@ -82,8 +100,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> fragmentMap.getValue(fragmentId[0])
-                1 -> fragmentMap.getValue(fragmentId[0])
-                2 -> if (Appconfig.isShowRSS) {
+                1 -> fragmentMap.getValue(fragmentId[1])
+                2 -> if (AppConfig.isShowRSS) {
                     fragmentMap.getValue(fragmentId[2])
                 } else {
                     fragmentMap.getValue(fragmentId[3])
@@ -95,7 +113,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
         }
 
         override fun getCount(): Int {
-            return if (Appconfig.isShowRSS) 4 else 3
+            return if (AppConfig.isShowRSS) 4 else 3
         }
 
         override fun getItemPosition(`object`: Any): Int {

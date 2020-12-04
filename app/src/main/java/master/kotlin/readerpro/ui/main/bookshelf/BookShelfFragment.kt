@@ -1,6 +1,7 @@
 package master.kotlin.readerpro.ui.main.bookshelf
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import master.kotlin.readerpro.R
 import master.kotlin.readerpro.base.VMBaseFragment
@@ -18,6 +19,10 @@ class BookShelfFragment : VMBaseFragment<BookShelfViewModel>(R.layout.fragment_b
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
 //        setSupportToolbar(toolbar)
 
+    }
+
+    fun  gotoTop(){
+        Log.i("BookShelfFragment","gotoTop")
     }
 
 
