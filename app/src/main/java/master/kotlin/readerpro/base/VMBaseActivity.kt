@@ -8,8 +8,8 @@ import master.kotlin.readerpro.constant.Theme
  * Description
  * Others
  */
-class VMBaseActivity<VM : ViewModel>(layoutId:Int,fullScreen:Boolean,theme:Theme=Theme.Auto){
-
-
+abstract class VMBaseActivity<VM : ViewModel>(layoutId:Int,fullScreen:Boolean=true,theme:Theme=Theme.Auto,toolBarTheme: Theme=Theme.Auto)
+    :BaseActivity(layoutId,fullScreen,theme,toolBarTheme){
+    protected  abstract val  viewModel:VM
 
 }
