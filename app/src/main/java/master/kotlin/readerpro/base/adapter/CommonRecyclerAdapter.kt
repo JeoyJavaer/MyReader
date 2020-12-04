@@ -22,6 +22,8 @@ abstract class CommonRecyclerAdapter<ITEM>(protected val  context: Context):Recy
         addItemViewDelegate(*delegates)
     }
 
+
+
     fun <DELEGATE : ItemViewDelegate<ITEM>> addItemViewDelegate(delegate: DELEGATE) {
         itemDelegates[itemDelegates.size] = delegate
     }
