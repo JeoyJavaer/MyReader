@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.dialog_recycler_view.*
 import master.kotlin.readerpro.R
 import master.kotlin.readerpro.base.BaseDialogFragment
+import master.kotlin.readerpro.base.adapter.ItemViewHolder
+import master.kotlin.readerpro.base.adapter.SimpleRecyclerAdapter
 import master.kotlin.readerpro.ui.widget.prefs.Preference
 import master.kotlin.readerpro.utils.getCompatDrawable
 

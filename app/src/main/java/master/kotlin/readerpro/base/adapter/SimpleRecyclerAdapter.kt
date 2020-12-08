@@ -7,8 +7,6 @@ import android.content.Context
  * Description
  * Others
  */
-abstract class SimpleRecyclerAdapter<ITEM>(context: Context,private val layoutId:Int)
-
-    :CommonRecyclerAdapter<ITEM>(context){
+abstract class SimpleRecyclerAdapter<ITEM>(context: Context,private val layoutId:Int):CommonRecyclerAdapter<ITEM>(context){
 
 }
