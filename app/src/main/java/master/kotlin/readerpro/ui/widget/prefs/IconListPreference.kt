@@ -15,15 +15,14 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceViewHolder
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.dialog_recycler_view.*
+import kotlinx.android.synthetic.main.item_icon_preference.view.*
 import master.kotlin.readerpro.R
 import master.kotlin.readerpro.base.BaseDialogFragment
 import master.kotlin.readerpro.base.adapter.ItemViewHolder
 import master.kotlin.readerpro.base.adapter.SimpleRecyclerAdapter
 import master.kotlin.readerpro.ui.widget.prefs.Preference
 import master.kotlin.readerpro.utils.getCompatDrawable
-
 import org.jetbrains.anko.sdk27.listeners.onClick
-
 
 class IconListPreference(context: Context, attrs: AttributeSet) : ListPreference(context, attrs) {
     private var iconNames: Array<CharSequence>

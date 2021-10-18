@@ -20,7 +20,7 @@ import master.kotlin.readerpro.ui.main.rss.RssFragment
 /**
  *
  */
-class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
+ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,
     BottomNavigationView.OnNavigationItemReselectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 

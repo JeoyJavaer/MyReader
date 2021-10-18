@@ -8,5 +8,4 @@ import androidx.recyclerview.widget.RecyclerView
  * Description
  * Others
  */
-class ItemViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-}
+class ItemViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView)
