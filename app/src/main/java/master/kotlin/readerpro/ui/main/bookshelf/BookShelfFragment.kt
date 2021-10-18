@@ -15,7 +15,7 @@ import master.kotlin.readerpro.ui.main.MainViewModel
 import master.kotlin.readerpro.utils.getViewModel
 import master.kotlin.readerpro.utils.getViewModelOfActivity
 
-/**
+/**书架
  * Created on 2020/9/2.
  * Description
  * Other
